@@ -24,19 +24,13 @@ namespace NorthwindBusinessPartnerIndex.Data
         }
         public IRepository GetRepository<T>(T entity) where T : class, IBusinessPartner
         {
-            if (entity is CustomerDto)
+            switch (entity)
             {
-                return Customers;
+                case CustomerDto x: return Customers;
+                case SupplierDto x: return Suppliers;
+                case ShipperDto x: return Shippers;
+                default: throw new Exception("Invalid type");
             }
-            else if (entity is SupplierDto)
-            {
-                return Suppliers;
-            }
-            else if (entity is ShipperDto)
-            {
-                return Shippers;
-            }
-            else return null;
         }
         public bool AddOrUpdate<T>(T entity) where T : class, IBusinessPartner
         {

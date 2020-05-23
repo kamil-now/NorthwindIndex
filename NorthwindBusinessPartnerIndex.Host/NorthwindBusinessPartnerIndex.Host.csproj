@@ -54,9 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service\BpService.cs" />
-    <Compile Include="Service\BpServiceHost.cs" />
-    <Compile Include="Service\BpServiceInstanceProvider.cs" />
+    <Compile Include="Service\BusinessPartnerService.cs" />
+    <Compile Include="Service\BusinessPartnerServiceHost.cs" />
+    <Compile Include="Service\BusinessPartnerServiceInstanceProvider.cs" />
     <Compile Include="CustomerService\CustomerService.cs" />
     <Compile Include="CustomerService\CustomerServiceHost.cs" />
     <Compile Include="CustomerService\CustomerServiceInstanceProvider.cs" />

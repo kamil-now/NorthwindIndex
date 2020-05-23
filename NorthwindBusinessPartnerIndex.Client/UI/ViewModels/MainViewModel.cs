@@ -22,7 +22,7 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
             BusinessPartnerData = contractorData;
         }
         public void ShowCustomers() => BusinessPartnerList.SetData(unitOfWork.CustomersService.GetAll()?.ToList());
-        public void ShowShippers() => BusinessPartnerList.SetData(unitOfWork.ShippersService.GetAll().ToList());
-        public void ShowSuppliers() => BusinessPartnerList.SetData(unitOfWork.SuppliersService.GetAll().ToList());
+        public void ShowShippers() => BusinessPartnerList.SetData(unitOfWork.ShippersService.GetAll()?.ToList());
+        public void ShowSuppliers() => BusinessPartnerList.SetData(unitOfWork.SuppliersService.GetAll()?.ToList());
     }
 }

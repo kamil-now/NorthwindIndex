@@ -73,5 +73,10 @@ namespace NorthwindBusinessPartnerIndex.Client
                     { nameof(Window.Title), "Northwind Business Partner Index" }
                 });
         }
+        protected override void OnExit(object sender, EventArgs e)
+        {
+            base.OnExit(sender, e);
+
+        }
     }
 }

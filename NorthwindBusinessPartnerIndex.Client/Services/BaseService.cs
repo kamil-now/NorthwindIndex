@@ -10,13 +10,12 @@ namespace NorthwindBusinessPartnerIndex.Client.Services
 
     public abstract class BaseService<TService, TData> where TService : IDataService<TData> where TData : IBusinessPartner  //: BaseService<ICustomerService, CustomerContract>
     {
-        protected readonly string Address = "http://localhost:8080";
-        protected abstract string Endpoint { get; }
+        protected abstract string Address { get; }
         public bool AddOrUpdate(TData entity) => FromService(service => service.AddOrUpdate(entity));
-        public IList<TData> GetAll() => FromService(service => service.GetAll());
-        public TData GetById(int id) => FromService(service => service.GetById(id));
+        public abstract IList<TData> GetAll();
+        public abstract TData GetById(int id);
 
-        private T FromService<T>(Func<TService, T> func)
+        protected T FromService<T>(Func<TService, T> func)
         {
             return GetChannelFactory().Using(factory =>
            {
@@ -26,7 +25,7 @@ namespace NorthwindBusinessPartnerIndex.Client.Services
         }
         protected ChannelFactory<TService> GetChannelFactory()
         {
-            return new ChannelFactory<TService>(new BasicHttpBinding(), new EndpointAddress($"{Address}/{Endpoint}"));
+            return new ChannelFactory<TService>(new BasicHttpBinding(), new EndpointAddress(Address));
         }
     }
 

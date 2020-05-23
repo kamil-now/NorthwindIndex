@@ -7,11 +7,11 @@ using System.ServiceModel.Dispatcher;
 
 namespace NorthwindBusinessPartnerIndex.Host
 {
-    public class ShipperServiceInstanceProvider : IInstanceProvider, IContractBehavior
+    public class BusinessPartnerServiceInstanceProvider : IInstanceProvider, IContractBehavior
     {
         private readonly UnitOfWork _unitOfWork;
 
-        public ShipperServiceInstanceProvider(UnitOfWork unitOfWork)
+        public BusinessPartnerServiceInstanceProvider(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -22,7 +22,7 @@ namespace NorthwindBusinessPartnerIndex.Host
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            return new ShipperService(_unitOfWork);
+            return new BusinessPartnerService(new CustomerService(_unitOfWork), new ShipperService(_unitOfWork), new SupplierService(_unitOfWork));
         }
 
         public void ReleaseInstance(InstanceContext instanceContext, object instance)
