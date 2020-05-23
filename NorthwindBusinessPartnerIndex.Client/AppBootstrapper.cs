@@ -1,11 +1,12 @@
 ﻿using Autofac;
 using Caliburn.Micro;
-using NorthwindBusinessPartnerIndex.Client.API;
+using NorthwindBusinessPartnerIndex.Client.Services;
 using NorthwindBusinessPartnerIndex.Client.UI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
-
 
 namespace NorthwindBusinessPartnerIndex.Client
 {
@@ -14,7 +15,10 @@ namespace NorthwindBusinessPartnerIndex.Client
         public IContainer Container { get; private set; }
         public AppBootstrapper()
         {
-            ViewLocator.AddSubNamespaceMapping("NorthwindBusinessPartnerIndex.Client.UI.ViewModels", "NorthwindBusinessPartnerIndex.Client.UI.Views");
+            var hostExePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\NorthwindBusinessPartnerIndex.Host\\bin\\Debug\\NorthwindBusinessPartnerIndex.Host.exe";
+            Process.Start(hostExePath);
+
+            ViewLocator.AddSubNamespaceMapping("NNorthwindBusinessPartnerIndex.Client.UI.ViewModels", "NorthwindBusinessPartnerIndex.Client.UI.Views");
 
             Container = BuildContainer();
 
@@ -30,9 +34,9 @@ namespace NorthwindBusinessPartnerIndex.Client
             builder.RegisterType<BusinessPartnerDataViewModel>().AsSelf().SingleInstance();
 
             builder.RegisterType<CustomerService>().AsSelf().SingleInstance();
-            builder.RegisterType<ShipperService >().AsSelf().SingleInstance();
+            builder.RegisterType<ShipperService>().AsSelf().SingleInstance();
             builder.RegisterType<SupplierService>().AsSelf().SingleInstance();
-            builder.RegisterType<UnitOfWork>().AsSelf().SingleInstance();
+            builder.RegisterType<AggregateService>().AsSelf().SingleInstance();
             builder.Register<IWindowManager>(c => new WindowManager()).InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator()).InstancePerLifetimeScope();
 

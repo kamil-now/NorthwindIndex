@@ -1,34 +1,34 @@
 ﻿using Caliburn.Micro;
-using NorthwindBusinessPartnerIndex.Client.API;
-using NorthwindBusinessPartnerIndex.Contracts.Data.Models;
+using NorthwindBusinessPartnerIndex.Client.Services;
+using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
     public class BusinessPartnerDataViewModel : Screen, ISelectedBusinessPartnerObserver
     {
-        public IDataEntity SelectedBusinessPartner { get; private set; }
-        private readonly UnitOfWork _unitOfWork;
-        public BusinessPartnerDataViewModel(UnitOfWork unitOfWork)
+        public IBusinessPartner SelectedBusinessPartner { get; private set; }
+        private readonly AggregateService _service;
+        public BusinessPartnerDataViewModel(AggregateService service)
         {
-            this._unitOfWork = unitOfWork;
+            _service = service;
         }
 
-        public void UpdateSelectedContractor(IDataEntity selectedBusinessPartner)
+        public void UpdateSelectedContractor(IBusinessPartner selectedBusinessPartner)
         {
             SelectedBusinessPartner = selectedBusinessPartner;
             NotifyOfPropertyChange(() => SelectedBusinessPartner);
         }
         public void Save()
         {
-            _unitOfWork.AddOrUpdateAndCommit(SelectedBusinessPartner);
+            _service.AddOrUpdate(SelectedBusinessPartner);
         }
         public void New()
         {
             switch (SelectedBusinessPartner)
             {
-                case Customer x: SelectedBusinessPartner = new Customer(); break;
-                case Shipper x: SelectedBusinessPartner = new Shipper(); break;
-                case Supplier x: SelectedBusinessPartner = new Supplier(); break;
+                case CustomerDto x: SelectedBusinessPartner = new CustomerDto(); break;
+                case ShipperDto x: SelectedBusinessPartner = new ShipperDto(); break;
+                case SupplierDto x: SelectedBusinessPartner = new SupplierDto(); break;
                 default: break;
             }
             NotifyOfPropertyChange(() => SelectedBusinessPartner);

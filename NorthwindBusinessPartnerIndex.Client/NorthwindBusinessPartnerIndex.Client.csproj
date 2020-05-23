@@ -81,11 +81,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="API\BaseService.cs" />
-    <Compile Include="API\ShipperService.cs" />
-    <Compile Include="API\SupplierService.cs" />
-    <Compile Include="API\CustomerService.cs" />
-    <Compile Include="API\UnitOfWork.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\ShipperService.cs" />
+    <Compile Include="Services\SupplierService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\AggregateService.cs" />
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerDataViewModel.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerListViewModel.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="UI\BusinessPartnerDataTemplateSelector.cs" />
     <Compile Include="UI\ISelectedBusinessPartnerObserver.cs" />
     <Compile Include="UI\ISelectedContractorSubject.cs" />
+    <Compile Include="Extensions\WcfExtensions.cs" />
     <Page Include="UI\Views\BusinessPartnerDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

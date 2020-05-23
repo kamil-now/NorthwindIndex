@@ -10,7 +10,7 @@
     <Border BorderBrush="Black"
             BorderThickness="1">
         <ListBox ItemsSource="{Binding Data, Mode=OneWay}"
-                 SelectedItem="{Binding SelectedContractor}"
+                 SelectedItem="{Binding SelectedBusinessPartner}"
                  VerticalAlignment="Stretch"
                  HorizontalAlignment="Stretch">
             <ListBox.ItemsPanel>

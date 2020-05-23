@@ -48,21 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\IShipperService.cs" />
-    <Compile Include="API\ISupplierService.cs" />
-    <Compile Include="API\ICustomerService.cs" />
-    <Compile Include="API\IDataService.cs" />
-    <Compile Include="Data\Models\IShipper.cs" />
-    <Compile Include="Data\Models\ISupplier.cs" />
-    <Compile Include="Data\Models\ICustomer.cs" />
-    <Compile Include="Data\Models\Customer.cs" />
-    <Compile Include="Data\Models\IDataEntity.cs" />
-    <Compile Include="Data\Models\Shipper.cs" />
-    <Compile Include="Data\Models\Supplier.cs" />
+    <Compile Include="ServiceContracts\IShipperService.cs" />
+    <Compile Include="ServiceContracts\ISupplierService.cs" />
+    <Compile Include="ServiceContracts\ICustomerService.cs" />
+    <Compile Include="ServiceContracts\IDataService.cs" />
+    <Compile Include="DataContracts\CustomerDto.cs" />
+    <Compile Include="DataContracts\IBusinessPartner.cs" />
+    <Compile Include="DataContracts\ShipperDto.cs" />
+    <Compile Include="DataContracts\SupplierDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using NorthwindBusinessPartnerIndex.Contracts.Data.Models;
+using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 using System.Collections.Generic;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
@@ -7,23 +7,23 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
     public class BusinessPartnerListViewModel : Screen, ISelectedBusinessPartnerSubject
     {
         List<ISelectedBusinessPartnerObserver> observers = new List<ISelectedBusinessPartnerObserver>();
-        private IDataEntity selectedContractor;
+        private IBusinessPartner selectedBusinessPartner;
 
-        public BindableCollection<IDataEntity> Data { get; set; } = new BindableCollection<IDataEntity>();
-        public IDataEntity SelectedContractor
+        public BindableCollection<IBusinessPartner> Data { get; set; } = new BindableCollection<IBusinessPartner>();
+        public IBusinessPartner SelectedBusinessPartner
         {
-            get => selectedContractor;
+            get => selectedBusinessPartner;
             set
             {
-                selectedContractor = value;
+                selectedBusinessPartner = value;
                 NotifyObservers();
             }
         }
 
 
-        public void SetData(IEnumerable<IDataEntity> newData)
+        public void SetData(IEnumerable<IBusinessPartner> newData)
         {
-            Data = new BindableCollection<IDataEntity>(newData);
+            Data = new BindableCollection<IBusinessPartner>(newData);
             NotifyOfPropertyChange(() => Data);
             Data.Refresh();
         }
@@ -41,7 +41,7 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 
         public void NotifyObservers()
         {
-            observers.ForEach(n => n.UpdateSelectedContractor(SelectedContractor));
+            observers.ForEach(n => n.UpdateSelectedContractor(SelectedBusinessPartner));
         }
 
     }

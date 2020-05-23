@@ -1,9 +1,9 @@
-﻿using NorthwindBusinessPartnerIndex.Contracts.Data.Models;
+﻿using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI
 {
     public interface ISelectedBusinessPartnerObserver
     {
-        void UpdateSelectedContractor(IDataEntity selectedContractor);
+        void UpdateSelectedContractor(IBusinessPartner selectedContractor);
     }
 }
