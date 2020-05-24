@@ -7,16 +7,16 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
     public class BusinessPartnerListViewModel : Screen, ISelectedBusinessPartnerSubject, IDataChangedObserver
     {
-        private List<ISelectedBusinessPartnerObserver> observers = new List<ISelectedBusinessPartnerObserver>();
-        private IBusinessPartner selectedBusinessPartner;
+        private readonly List<ISelectedBusinessPartnerObserver> _observers = new List<ISelectedBusinessPartnerObserver>();
+        private IBusinessPartner _selectedBusinessPartner;
 
         public BindableCollection<IBusinessPartner> Data { get; set; } = new BindableCollection<IBusinessPartner>();
         public IBusinessPartner SelectedBusinessPartner
         {
-            get => selectedBusinessPartner;
+            get => _selectedBusinessPartner;
             set
             {
-                selectedBusinessPartner = value;
+                _selectedBusinessPartner = value;
                 NotifyObservers();
             }
         }
@@ -29,6 +29,10 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
                 return;
             }
             var newData = await _fetchData;
+            if(newData is null)
+            {
+                return;
+            }
             Data = new BindableCollection<IBusinessPartner>(newData);
             NotifyOfPropertyChange(() => Data);
             Data.Refresh();
@@ -40,19 +44,19 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
         }
         public void Attach(ISelectedBusinessPartnerObserver observer)
         {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
+            if (!_observers.Contains(observer))
+                _observers.Add(observer);
         }
 
         public void Detach(ISelectedBusinessPartnerObserver observer)
         {
-            if (observers.Contains(observer))
-                observers.Remove(observer);
+            if (_observers.Contains(observer))
+                _observers.Remove(observer);
         }
 
         public void NotifyObservers()
         {
-            observers.ForEach(n => n.SetBusinessPartner(SelectedBusinessPartner));
+            _observers.ForEach(n => n.SetBusinessPartner(SelectedBusinessPartner));
         }
 
     }

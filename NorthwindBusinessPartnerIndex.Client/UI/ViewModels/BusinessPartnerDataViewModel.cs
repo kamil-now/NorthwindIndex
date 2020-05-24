@@ -9,8 +9,9 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
     public class BusinessPartnerDataViewModel : Screen, ISelectedBusinessPartnerObserver, IDataChangedSubject
     {
-        private List<IDataChangedObserver> observers = new List<IDataChangedObserver>();
         public IBusinessPartner SelectedBusinessPartner { get; private set; }
+
+        private readonly List<IDataChangedObserver> _observers = new List<IDataChangedObserver>();
         private readonly BusinessPartnerService _service;
         public BusinessPartnerDataViewModel(BusinessPartnerService service)
         {
@@ -64,19 +65,19 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
         }
         public void Attach(IDataChangedObserver observer)
         {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
+            if (!_observers.Contains(observer))
+                _observers.Add(observer);
         }
 
         public void Detach(IDataChangedObserver observer)
         {
-            if (observers.Contains(observer))
-                observers.Remove(observer);
+            if (_observers.Contains(observer))
+                _observers.Remove(observer);
         }
 
         public async Task NotifyObservers()
         {
-            foreach (var observer in observers)
+            foreach (var observer in _observers)
             {
                 await observer.RefreshData();
             }

@@ -21,21 +21,21 @@ namespace NorthwindBusinessPartnerIndex.Host
         {
             Console.WriteLine("Get all customers...");
             var result = _customerService.GetAllCustomers();
-            Console.WriteLine($"Fetched {result.Count} customers");
+            Console.WriteLine($"\tFetched {result.Count} customers");
             return result;
         }
         public IList<ShipperDto> GetAllShippers()
         {
             Console.WriteLine("Get all shippers...");
             var result = _shipperService.GetAllShippers();
-            Console.WriteLine($"Fetched {result.Count} shippers");
+            Console.WriteLine($"\tFetched {result.Count} shippers");
             return result;
         }
         public IList<SupplierDto> GetAllSuppliers()
         {
             Console.WriteLine("Get all suppliers...");
             var result = _supplierService.GetAllSuppliers();
-            Console.WriteLine($"Fetched {result.Count} suppliers");
+            Console.WriteLine($"\tFetched {result.Count} suppliers");
             return result;
         }
 
@@ -45,9 +45,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _customerService.GetCustomerById(id);
             if (result is null)
             {
-                Console.WriteLine($"Failed to fetch customer with id={id}");
+                Console.WriteLine($"\tFailed to fetch customer with id={id}");
             }
-            Console.WriteLine($"Fetched customer with id={id}");
+            Console.WriteLine($"\tFetched customer with id={id}");
             return result;
         }
         public ShipperDto GetShipperById(int id)
@@ -56,9 +56,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _shipperService.GetShipperById(id);
             if (result is null)
             {
-                Console.WriteLine($"Failed to fetch shipper with id={id}");
+                Console.WriteLine($"\tFailed to fetch shipper with id={id}");
             }
-            Console.WriteLine($"Fetched shipper with id={id}");
+            Console.WriteLine($"\tFetched shipper with id={id}");
             return result;
         }
         public SupplierDto GetSupplierById(int id)
@@ -67,9 +67,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _supplierService.GetSupplierById(id);
             if (result is null)
             {
-                Console.WriteLine($"Failed to fetch customer with id={id}");
+                Console.WriteLine($"\tFailed to fetch customer with id={id}");
             }
-            Console.WriteLine($"Fetched with id={id}");
+            Console.WriteLine($"\tFetched with id={id}");
             return result;
         }
 
@@ -79,7 +79,7 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _customerService.AddOrUpdate(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to add (update) customer with id={entity.Id}");
+                Console.WriteLine($"\tFailed to add (update) customer with id={entity.Id}");
             }
             Console.WriteLine($"Added (updated) customer with id={entity.Id}");
             return result;
@@ -90,9 +90,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _supplierService.AddOrUpdate(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to add (update) supplier with id={entity.Id}");
+                Console.WriteLine($"\tFailed to add (update) supplier with id={entity.Id}");
             }
-            Console.WriteLine($"Added (updated) supplier with id={entity.Id}");
+            Console.WriteLine($"\tAdded (updated) supplier with id={entity.Id}");
             return result;
         }
         public bool AddOrUpdate(ShipperDto entity)
@@ -101,9 +101,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _shipperService.AddOrUpdate(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to add (update) shipper with id={entity.Id}");
+                Console.WriteLine($"\tFailed to add (update) shipper with id={entity.Id}");
             }
-            Console.WriteLine($"Added (updated) shipper with id={entity.Id}");
+            Console.WriteLine($"\tAdded (updated) shipper with id={entity.Id}");
             return result;
         }
         public bool Delete(CustomerDto entity)
@@ -112,9 +112,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _customerService.Delete(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to delete customer with id={entity.Id}");
+                Console.WriteLine($"\tFailed to delete customer with id={entity.Id}");
             }
-            Console.WriteLine($"Deleted customer with id={entity.Id}");
+            Console.WriteLine($"\tDeleted customer with id={entity.Id}");
             return result;
         }
         public bool Delete(SupplierDto entity)
@@ -123,9 +123,9 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _supplierService.Delete(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to delete supplier with id={entity.Id}");
+                Console.WriteLine($"\tFailed to delete supplier with id={entity.Id}");
             }
-            Console.WriteLine($"Deleted supplier with id={entity.Id}");
+            Console.WriteLine($"\tDeleted supplier with id={entity.Id}");
             return result;
         }
         public bool Delete(ShipperDto entity)
@@ -134,24 +134,10 @@ namespace NorthwindBusinessPartnerIndex.Host
             var result = _shipperService.Delete(entity);
             if (!result)
             {
-                Console.WriteLine($"Failed to delete shipper with id={entity.Id}");
+                Console.WriteLine($"\tFailed to delete shipper with id={entity.Id}");
             }
-            Console.WriteLine($"Deleted shipper with id={entity.Id}");
+            Console.WriteLine($"\tDeleted shipper with id={entity.Id}");
             return result;
         }
-
-        //public bool Commit()
-        //{
-        //    try
-        //    {
-        //        _unitOfWork.Commit();
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-
-        //}
     }
 }
