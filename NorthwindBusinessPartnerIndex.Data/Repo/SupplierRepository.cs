@@ -1,4 +1,5 @@
-﻿using NorthwindBusinessPartnerIndex.Data.Models;
+﻿using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
+using NorthwindBusinessPartnerIndex.Data.Models;
 using System.Data.Entity;
 using System.Linq;
 

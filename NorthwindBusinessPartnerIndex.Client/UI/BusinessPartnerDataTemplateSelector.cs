@@ -10,9 +10,9 @@ namespace NorthwindBusinessPartnerIndex.Client.UI
         {
             switch (item)
             {
-                case CustomerDto c: return Application.Current.FindResource("CustomerDataTemplate") as DataTemplate;
-                case ShipperDto c: return Application.Current.FindResource("ShipperDataTemplate") as DataTemplate;
-                case SupplierDto c: return Application.Current.FindResource("SupplierDataTemplate") as DataTemplate;
+                case CustomerDto _: return Application.Current.FindResource("CustomerDataTemplate") as DataTemplate;
+                case ShipperDto _: return Application.Current.FindResource("ShipperDataTemplate") as DataTemplate;
+                case SupplierDto _: return Application.Current.FindResource("SupplierDataTemplate") as DataTemplate;
                 default: return null;
             }
 

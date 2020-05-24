@@ -1,4 +1,5 @@
 ﻿using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
+using NorthwindBusinessPartnerIndex.Data.Models;
 using NorthwindBusinessPartnerIndex.Data.Repo;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -35,10 +36,13 @@ namespace NorthwindBusinessPartnerIndex.Data
 
                 if (isValid)
                 {
-                    repo.Add(entity);
                     if (exists)
                     {
                         repo.Edit(databaseEntity);
+                    }
+                    else
+                    {
+                        repo.Add(entity);
                     }
                 }
             }
@@ -83,9 +87,9 @@ namespace NorthwindBusinessPartnerIndex.Data
         {
             switch (entity)
             {
-                case CustomerDto _: return Customers;
-                case SupplierDto _: return Suppliers;
-                case ShipperDto _: return Shippers;
+                case Customer _: return Customers;
+                case Supplier _: return Suppliers;
+                case Shipper _: return Shippers;
                 default: throw new Exception("Invalid type");
             }
         }

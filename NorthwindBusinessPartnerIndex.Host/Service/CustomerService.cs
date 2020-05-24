@@ -1,6 +1,7 @@
 ﻿using NorthwindBusinessPartnerIndex.Contracts.API;
 using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 using NorthwindBusinessPartnerIndex.Data;
+using NorthwindBusinessPartnerIndex.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,44 +18,17 @@ namespace NorthwindBusinessPartnerIndex.Host
         public IList<CustomerDto> GetAllCustomers()
         {
             var customers = _unitOfWork.Customers.GetAll().ToList();
-            return customers
-                .Select(x => new CustomerDto()
-                {
-                    CustomerID = x.CustomerID,
-                    CompanyName = x.CompanyName,
-                    ContactName = x.ContactName,
-                    ContactTitle = x.ContactTitle,
-                    Address = x.Address,
-                    City = x.City,
-                    Region = x.Region,
-                    PostalCode = x.PostalCode,
-                    Country = x.Country,
-                    Phone = x.Phone,
-                    Fax = x.Fax
-                }).ToList();
+            return customers.Select(entity => Mapper.Map(entity)).ToList();
         }
 
         public CustomerDto GetCustomerById(int id)
         {
-            var x = _unitOfWork.Customers.Get(id.ToString());
-            return new CustomerDto()
-            {
-                CustomerID = x.CustomerID,
-                CompanyName = x.CompanyName,
-                ContactName = x.ContactName,
-                ContactTitle = x.ContactTitle,
-                Address = x.Address,
-                City = x.City,
-                Region = x.Region,
-                PostalCode = x.PostalCode,
-                Country = x.Country,
-                Phone = x.Phone,
-                Fax = x.Fax
-            };
+            var entity = _unitOfWork.Customers.Get(id.ToString());
+            return Mapper.Map(entity);
         }
-        public bool AddOrUpdate(CustomerDto entity)
+        public bool AddOrUpdate(CustomerDto dto)
         {
-            var result = _unitOfWork.AddOrUpdate(entity);
+            var result = _unitOfWork.AddOrUpdate(Mapper.Map(dto));
             if (result)
             {
                 _unitOfWork.Commit();

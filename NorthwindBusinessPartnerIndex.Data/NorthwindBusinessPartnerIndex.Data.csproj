@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Shipper.cs" />
     <Compile Include="Models\Supplier.cs" />
@@ -65,14 +66,14 @@
     <Compile Include="Repo\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NorthwindBusinessPartnerIndex.Contracts\NorthwindBusinessPartnerIndex.Contracts.csproj">
-      <Project>{A5505DC8-3320-4AD8-A12F-42F83FAA5F63}</Project>
-      <Name>NorthwindBusinessPartnerIndex.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NorthwindBusinessPartnerIndex.Contracts\NorthwindBusinessPartnerIndex.Contracts.csproj">
+      <Project>{a5505dc8-3320-4ad8-a12f-42f83faa5f63}</Project>
+      <Name>NorthwindBusinessPartnerIndex.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

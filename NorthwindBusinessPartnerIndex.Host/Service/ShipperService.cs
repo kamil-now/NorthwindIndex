@@ -1,6 +1,7 @@
 ﻿using NorthwindBusinessPartnerIndex.Contracts.API;
 using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 using NorthwindBusinessPartnerIndex.Data;
+using NorthwindBusinessPartnerIndex.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,29 +18,18 @@ namespace NorthwindBusinessPartnerIndex.Host
         public IList<ShipperDto> GetAllShippers()
         {
             var shippers = _unitOfWork.Shippers.GetAll().ToList();
-            return shippers
-                .Select(x => new ShipperDto()
-                {
-                    ShipperID = x.ShipperID,
-                    CompanyName = x.CompanyName,
-                    Phone = x.Phone
-                }).ToList();
+            return shippers.Select(entity => Mapper.Map(entity)).ToList();
         }
 
         public ShipperDto GetShipperById(int id)
         {
-            var x = _unitOfWork.Shippers.Get(id.ToString());
-            return new ShipperDto()
-            {
-                ShipperID = x.ShipperID,
-                CompanyName = x.CompanyName,
-                Phone = x.Phone
-            };
+            var entity = _unitOfWork.Shippers.Get(id.ToString());
+            return Mapper.Map(entity);
         }
 
-        public bool AddOrUpdate(ShipperDto entity)
+        public bool AddOrUpdate(ShipperDto dto)
         {
-            var result = _unitOfWork.AddOrUpdate(entity);
+            var result = _unitOfWork.AddOrUpdate(Mapper.Map(dto));
             if (result)
             {
                 _unitOfWork.Commit();
