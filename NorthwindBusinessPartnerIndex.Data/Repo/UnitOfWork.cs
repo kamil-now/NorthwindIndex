@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace NorthwindBusinessPartnerIndex.Data
 {
-    public class UnitOfWork
+    public class UnitOfWork : IDisposable
     {
-        private readonly DbContext dbContext;
+        private readonly DbContext _dbContext;
 
         public CustomerRepository Customers { get; }
         public ShipperRepository Shippers { get; }
@@ -17,36 +17,36 @@ namespace NorthwindBusinessPartnerIndex.Data
 
         public UnitOfWork(DbContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
             Customers = new CustomerRepository(dbContext);
             Shippers = new ShipperRepository(dbContext);
             Suppliers = new SupplierRepository(dbContext);
         }
-        public IRepository GetRepository<T>(T entity) where T : class, IBusinessPartner
-        {
-            switch (entity)
-            {
-                case CustomerDto x: return Customers;
-                case SupplierDto x: return Suppliers;
-                case ShipperDto x: return Shippers;
-                default: throw new Exception("Invalid type");
-            }
-        }
+
         public bool AddOrUpdate<T>(T entity) where T : class, IBusinessPartner
         {
-            var repo = GetRepository(entity);
-            var databaseEntity = repo.Get(entity.Id);
-            var exists = databaseEntity != null;
-            var isValid = ValidateRequiredProperties(entity);
-
-            if (isValid)
+            var isValid = false;
+            try
             {
-                repo.Add(entity);
-                if (exists)
+                var repo = GetRepository(entity);
+                var databaseEntity = repo.Get(entity.Id);
+                var exists = databaseEntity != null;
+                isValid = ValidateRequiredProperties(entity);
+
+                if (isValid)
                 {
-                    repo.Edit(databaseEntity);
+                    repo.Add(entity);
+                    if (exists)
+                    {
+                        repo.Edit(databaseEntity);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
             return isValid;
         }
         public bool ValidateRequiredProperties<T>(T entity) where T : class, IBusinessPartner
@@ -56,15 +56,15 @@ namespace NorthwindBusinessPartnerIndex.Data
         }
         public void Commit()
         {
-            dbContext.SaveChanges();
+            _dbContext.SaveChanges();
         }
         public void Dispose()
         {
-            dbContext.Dispose();
+            _dbContext.Dispose();
         }
         public void RejectChanges()
         {
-            foreach (var entry in dbContext.ChangeTracker.Entries()
+            foreach (var entry in _dbContext.ChangeTracker.Entries()
                   .Where(e => e.State != EntityState.Unchanged))
             {
                 switch (entry.State)
@@ -77,6 +77,16 @@ namespace NorthwindBusinessPartnerIndex.Data
                         entry.Reload();
                         break;
                 }
+            }
+        }
+        private IRepository GetRepository<T>(T entity) where T : class, IBusinessPartner
+        {
+            switch (entity)
+            {
+                case CustomerDto _: return Customers;
+                case SupplierDto _: return Suppliers;
+                case ShipperDto _: return Shippers;
+                default: throw new Exception("Invalid type");
             }
         }
     }

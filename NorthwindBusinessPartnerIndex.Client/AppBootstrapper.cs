@@ -18,7 +18,7 @@ namespace NorthwindBusinessPartnerIndex.Client
             var hostExePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\NorthwindBusinessPartnerIndex.Host\\bin\\Debug\\NorthwindBusinessPartnerIndex.Host.exe";
             Process.Start(hostExePath);
 
-            ViewLocator.AddSubNamespaceMapping("NNorthwindBusinessPartnerIndex.Client.UI.ViewModels", "NorthwindBusinessPartnerIndex.Client.UI.Views");
+            ViewLocator.AddSubNamespaceMapping("NorthwindBusinessPartnerIndex.Client.UI.ViewModels", "NorthwindBusinessPartnerIndex.Client.UI.Views");
 
             Container = BuildContainer();
 
@@ -36,7 +36,7 @@ namespace NorthwindBusinessPartnerIndex.Client
             builder.RegisterType<CustomerService>().AsSelf().SingleInstance();
             builder.RegisterType<ShipperService>().AsSelf().SingleInstance();
             builder.RegisterType<SupplierService>().AsSelf().SingleInstance();
-            builder.RegisterType<AggregateService>().AsSelf().SingleInstance();
+            builder.RegisterType<BusinessPartnerService>().AsSelf().SingleInstance();
             builder.Register<IWindowManager>(c => new WindowManager()).InstancePerLifetimeScope();
             builder.Register<IEventAggregator>(c => new EventAggregator()).InstancePerLifetimeScope();
 

@@ -24,7 +24,9 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
         public void SetData(IEnumerable<IBusinessPartner> newData)
         {
             if (newData is null)
+            {
                 return;
+            }
             Data = new BindableCollection<IBusinessPartner>(newData);
             NotifyOfPropertyChange(() => Data);
             Data.Refresh();

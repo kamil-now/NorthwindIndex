@@ -1,28 +1,39 @@
 ﻿using Caliburn.Micro;
 using NorthwindBusinessPartnerIndex.Client.Services;
-using System.Linq;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
     public class MainViewModel : Screen
     {
-        AggregateService unitOfWork;
-
         public BusinessPartnerListViewModel BusinessPartnerList { get; }
         public BusinessPartnerDataViewModel BusinessPartnerData { get; }
+
+        private readonly BusinessPartnerService _businessPartnerService;
         public MainViewModel(
-            AggregateService unitOfWork,
+            BusinessPartnerService service,
             BusinessPartnerListViewModel contractorList,
             BusinessPartnerDataViewModel contractorData)
         {
-            this.unitOfWork = unitOfWork;
+            _businessPartnerService = service;
 
             BusinessPartnerList = contractorList;
             BusinessPartnerList.Attach(contractorData);
             BusinessPartnerData = contractorData;
         }
-        public void ShowCustomers() => BusinessPartnerList.SetData(unitOfWork.CustomersService.GetAll()?.ToList());
-        public void ShowShippers() => BusinessPartnerList.SetData(unitOfWork.ShippersService.GetAll()?.ToList());
-        public void ShowSuppliers() => BusinessPartnerList.SetData(unitOfWork.SuppliersService.GetAll()?.ToList());
+        public async void ShowCustomers()
+        {
+            var data = await _businessPartnerService.CustomersService.GetAll();
+            BusinessPartnerList.SetData(data);
+        }
+        public async void ShowShippers()
+        {
+            var data = await _businessPartnerService.ShippersService.GetAll();
+            BusinessPartnerList.SetData(data);
+        }
+        public async void ShowSuppliers()
+        {
+            var data = await _businessPartnerService.SuppliersService.GetAll();
+            BusinessPartnerList.SetData(data);
+        }
     }
 }

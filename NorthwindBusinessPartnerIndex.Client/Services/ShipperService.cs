@@ -1,6 +1,7 @@
 ﻿using NorthwindBusinessPartnerIndex.Contracts.API;
 using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NorthwindBusinessPartnerIndex.Client.Services
 {
@@ -8,7 +9,7 @@ namespace NorthwindBusinessPartnerIndex.Client.Services
     {
         protected override string Address => "http://localhost:8080//Shippers";
 
-        public override IList<ShipperDto> GetAll() => FromService(service => service.GetAllShippers());
-        public override ShipperDto GetById(int id) => FromService(service => service.GetShipperById(id));
+        public override Task<IList<ShipperDto>> GetAll() => FromService(service => service.GetAllShippers());
+        public override Task<ShipperDto> GetById(int id) => FromService(service => service.GetShipperById(id));
     }
 }

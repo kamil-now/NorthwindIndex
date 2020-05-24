@@ -16,11 +16,11 @@ namespace NorthwindBusinessPartnerIndex.Host
 
         public IList<ShipperDto> GetAllShippers()
         {
-            var customers = _unitOfWork.Shippers.GetAll().ToList();
-            return customers
+            var shippers = _unitOfWork.Shippers.GetAll().ToList();
+            return shippers
                 .Select(x => new ShipperDto()
                 {
-                    ShipperId = x.ShipperID,
+                    ShipperID = x.ShipperID,
                     CompanyName = x.CompanyName,
                     Phone = x.Phone
                 }).ToList();
@@ -31,7 +31,7 @@ namespace NorthwindBusinessPartnerIndex.Host
             var x = _unitOfWork.Shippers.Get(id.ToString());
             return new ShipperDto()
             {
-                ShipperId = x.ShipperID,
+                ShipperID = x.ShipperID,
                 CompanyName = x.CompanyName,
                 Phone = x.Phone
             };

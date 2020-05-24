@@ -1,17 +1,22 @@
 ﻿using NorthwindBusinessPartnerIndex.Data;
 using System;
+using System.Linq;
 
 namespace NorthwindBusinessPartnerIndex.Host
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var _unitOfWork = new UnitOfWork(new NorthwindContext());
-            var customerHost = new BusinessPartnerServiceHost(_unitOfWork, typeof(BusinessPartnerService));
-            customerHost.Open();
-            Console.WriteLine("Service is running");
-            Console.Read();
+            using (var unitOfWork = new UnitOfWork(new NorthwindContext()))
+            {
+                using (var host = new BusinessPartnerServiceHost(unitOfWork, typeof(BusinessPartnerService)))
+                {
+                    host.Open();
+                    Console.WriteLine($"Service is running on \n{string.Join("\n", host.BaseAddresses.Select(x => x.OriginalString).ToArray())}");
+                    Console.Read();
+                }
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ namespace NorthwindBusinessPartnerIndex.Contracts.DataContracts
     public class CustomerDto : IBusinessPartner
     {
         [DataMember]
-        public string Id { get => CustomerId; set => CustomerId = value; }
+        public string Id { get => CustomerID; set => CustomerID = value; }
         [DataMember]
-        public string CustomerId { get; set; }
+        public string CustomerID { get; set; }
         [DataMember]
         public string CompanyName { get; set; }
         [DataMember]

@@ -1,14 +1,15 @@
 ﻿using Caliburn.Micro;
 using NorthwindBusinessPartnerIndex.Client.Services;
 using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
+using System.Windows;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
     public class BusinessPartnerDataViewModel : Screen, ISelectedBusinessPartnerObserver
     {
         public IBusinessPartner SelectedBusinessPartner { get; private set; }
-        private readonly AggregateService _service;
-        public BusinessPartnerDataViewModel(AggregateService service)
+        private readonly BusinessPartnerService _service;
+        public BusinessPartnerDataViewModel(BusinessPartnerService service)
         {
             _service = service;
         }
@@ -18,9 +19,16 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
             SelectedBusinessPartner = selectedBusinessPartner;
             NotifyOfPropertyChange(() => SelectedBusinessPartner);
         }
-        public void Save()
+        public async void Save()
         {
-            _service.AddOrUpdate(SelectedBusinessPartner);
+            if (await _service.AddOrUpdate(SelectedBusinessPartner))
+            {
+                MessageBox.Show("Data has been saved", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Input data is invalid", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         public void New()
         {

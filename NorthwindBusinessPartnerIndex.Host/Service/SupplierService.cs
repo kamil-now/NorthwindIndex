@@ -16,11 +16,11 @@ namespace NorthwindBusinessPartnerIndex.Host
 
         public IList<SupplierDto> GetAllSuppliers()
         {
-            var customers = _unitOfWork.Suppliers.GetAll().ToList();
-            return customers
+            var suppliers = _unitOfWork.Suppliers.GetAll().ToList();
+            return suppliers
                 .Select(x => new SupplierDto()
                 {
-                    SupplierId = x.SupplierID,
+                    SupplierID = x.SupplierID,
                     CompanyName = x.CompanyName,
                     ContactName = x.ContactName,
                     ContactTitle = x.ContactTitle,
@@ -39,7 +39,7 @@ namespace NorthwindBusinessPartnerIndex.Host
             var x = _unitOfWork.Suppliers.Get(id.ToString());
             return new SupplierDto()
             {
-                SupplierId = x.SupplierID,
+                SupplierID = x.SupplierID,
                 CompanyName = x.CompanyName,
                 ContactName = x.ContactName,
                 ContactTitle = x.ContactTitle,

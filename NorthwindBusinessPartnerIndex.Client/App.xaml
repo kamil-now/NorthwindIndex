@@ -30,7 +30,7 @@
             <DataTemplate x:Key="CustomerDataTemplate">
                 <UniformGrid Columns="2">
                     <TextBlock Text="ID: " />
-                    <TextBox Text="{Binding CustomerId}" />
+                    <TextBox Text="{Binding CustomerID}" />
                     <TextBlock Text="Company name: " />
                     <TextBox Text="{Binding CompanyName}" />
                     <TextBlock Text="Contact name: " />
@@ -58,7 +58,7 @@
             <DataTemplate x:Key="SupplierDataTemplate">
                 <UniformGrid Columns="2">
                     <TextBlock Text="ID: " />
-                    <TextBox Text="{Binding SupplierId}" />
+                    <TextBox Text="{Binding SupplierID}" />
                     <TextBlock Text="Company name: " />
                     <TextBox Text="{Binding CompanyName}" />
                     <TextBlock Text="Contact name: " />
@@ -88,7 +88,7 @@
 
                 <UniformGrid Columns="2">
                     <TextBlock Text="ID: " />
-                    <TextBox Text="{Binding ShipperId}" />
+                    <TextBox Text="{Binding ShipperID}" />
                     <TextBlock Text="Company name: " />
                     <TextBox Text="{Binding CompanyName}" />
                     <TextBlock Text="Phone number: " />

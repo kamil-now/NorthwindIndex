@@ -6,9 +6,17 @@ namespace NorthwindBusinessPartnerIndex.Contracts.DataContracts
     public class SupplierDto : IBusinessPartner
     {
         [DataMember]
-        public string Id => SupplierId.ToString();
+        public string Id
+        {
+            get => SupplierID.ToString(); 
+            set
+            {
+                int.TryParse(value, out int result);
+                SupplierID = result;
+            }
+        }
         [DataMember]
-        public int SupplierId { get; set; }
+        public int SupplierID { get; set; }
         [DataMember]
         public string CompanyName { get; set; }
         [DataMember]

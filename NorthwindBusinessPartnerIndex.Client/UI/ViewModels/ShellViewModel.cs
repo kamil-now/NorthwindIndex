@@ -6,7 +6,7 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
     public class ShellViewModel : Screen
     {
         public MainViewModel MainView { get; }
-        public ShellViewModel(AggregateService service, MainViewModel mainView)
+        public ShellViewModel(BusinessPartnerService service, MainViewModel mainView)
         {
             MainView = mainView;
         }

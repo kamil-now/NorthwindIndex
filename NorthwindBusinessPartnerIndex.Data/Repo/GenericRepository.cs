@@ -8,7 +8,7 @@ namespace NorthwindBusinessPartnerIndex.Data.Repo
 {
     public abstract class GenericRepository<C, T> : IGenericRepository<T> where T : class, IBusinessPartner where C : DbContext
     {
-        public T Get(string id) => GetAll().FirstOrDefault(x => x.Id == id);
+        public abstract T Get(string id);
         public C Context { get; set; }
 
         public virtual IQueryable<T> GetAll() => Context.Set<T>();

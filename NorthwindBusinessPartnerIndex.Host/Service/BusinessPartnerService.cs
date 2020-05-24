@@ -17,7 +17,6 @@ namespace NorthwindBusinessPartnerIndex.Host
         }
 
         public bool AddOrUpdate(CustomerDto entity) => _customerService.AddOrUpdate(entity);
-
         public bool AddOrUpdate(SupplierDto entity) => _supplierService.AddOrUpdate(entity);
         public bool AddOrUpdate(ShipperDto entity) => _shipperService.AddOrUpdate(entity);
 
@@ -28,5 +27,19 @@ namespace NorthwindBusinessPartnerIndex.Host
         public CustomerDto GetCustomerById(int id) => _customerService.GetCustomerById(id);
         public ShipperDto GetShipperById(int id) => _shipperService.GetShipperById(id);
         public SupplierDto GetSupplierById(int id) => _supplierService.GetSupplierById(id);
+
+        //public bool Commit()
+        //{
+        //    try
+        //    {
+        //        _unitOfWork.Commit();
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+
+        //}
     }
 }

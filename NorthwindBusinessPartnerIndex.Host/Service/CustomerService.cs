@@ -20,7 +20,7 @@ namespace NorthwindBusinessPartnerIndex.Host
             return customers
                 .Select(x => new CustomerDto()
                 {
-                    CustomerId = x.CustomerID,
+                    CustomerID = x.CustomerID,
                     CompanyName = x.CompanyName,
                     ContactName = x.ContactName,
                     ContactTitle = x.ContactTitle,
@@ -39,7 +39,7 @@ namespace NorthwindBusinessPartnerIndex.Host
             var x = _unitOfWork.Customers.Get(id.ToString());
             return new CustomerDto()
             {
-                CustomerId = x.CustomerID,
+                CustomerID = x.CustomerID,
                 CompanyName = x.CompanyName,
                 ContactName = x.ContactName,
                 ContactTitle = x.ContactTitle,

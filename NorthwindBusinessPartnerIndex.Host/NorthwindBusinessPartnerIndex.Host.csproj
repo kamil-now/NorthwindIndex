@@ -57,17 +57,11 @@
     <Compile Include="Service\BusinessPartnerService.cs" />
     <Compile Include="Service\BusinessPartnerServiceHost.cs" />
     <Compile Include="Service\BusinessPartnerServiceInstanceProvider.cs" />
-    <Compile Include="CustomerService\CustomerService.cs" />
-    <Compile Include="CustomerService\CustomerServiceHost.cs" />
-    <Compile Include="CustomerService\CustomerServiceInstanceProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShipperService\ShipperService.cs" />
-    <Compile Include="ShipperService\ShipperServiceHost.cs" />
-    <Compile Include="ShipperService\ShipperServiceInstanceProvider.cs" />
-    <Compile Include="SupplierService\SupplierService.cs" />
-    <Compile Include="SupplierService\SupplierServiceHost.cs" />
-    <Compile Include="SupplierService\SupplierServiceInstanceProvider.cs" />
+    <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\ShipperService.cs" />
+    <Compile Include="Service\SupplierService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

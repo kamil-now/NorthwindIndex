@@ -85,7 +85,7 @@
     <Compile Include="Services\ShipperService.cs" />
     <Compile Include="Services\SupplierService.cs" />
     <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Services\AggregateService.cs" />
+    <Compile Include="Services\BusinessPartnerService.cs" />
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerDataViewModel.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerListViewModel.cs" />
@@ -106,7 +106,6 @@
     <Compile Include="UI\BusinessPartnerDataTemplateSelector.cs" />
     <Compile Include="UI\ISelectedBusinessPartnerObserver.cs" />
     <Compile Include="UI\ISelectedContractorSubject.cs" />
-    <Compile Include="Extensions\WcfExtensions.cs" />
     <Page Include="UI\Views\BusinessPartnerDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
