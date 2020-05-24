@@ -48,10 +48,33 @@ namespace NorthwindBusinessPartnerIndex.Data
             }
             catch (Exception e)
             {
+                isValid = false;
                 throw e;
             }
 
             return isValid;
+        }
+        public bool Delete<T>(T entity) where T : class, IBusinessPartner
+        {
+            var deleted = false;
+            try
+            {
+                var repo = GetRepository(entity);
+                var databaseEntity = repo.Get(entity.Id);
+                var exists = databaseEntity != null;
+                if (exists)
+                {
+                    repo.Delete(entity);
+                    deleted = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return deleted;
         }
         public bool ValidateRequiredProperties<T>(T entity) where T : class, IBusinessPartner
         {

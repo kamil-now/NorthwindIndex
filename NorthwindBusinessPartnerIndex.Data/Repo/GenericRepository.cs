@@ -11,13 +11,17 @@ namespace NorthwindBusinessPartnerIndex.Data.Repo
         public abstract T Get(string id);
         public C Context { get; set; }
 
-        public virtual IQueryable<T> GetAll() => Context.Set<T>();
+        public virtual IQueryable<T> GetAll() => Context.Set<T>().AsNoTracking();
 
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate) => Context.Set<T>().Where(predicate);
 
         public virtual void Add(T entity) => Context.Set<T>().Add(entity);
 
-        public virtual void Delete(T entity) => Context.Set<T>().Remove(entity);
+        public virtual void Delete(T entity)
+        {
+            Context.Set<T>().Attach(entity);
+            Context.Set<T>().Remove(entity);
+        }
 
         public virtual void Edit(T entity) => Context.Entry(entity).State = EntityState.Modified;
 
@@ -30,7 +34,7 @@ namespace NorthwindBusinessPartnerIndex.Data.Repo
 
         public void Add(IBusinessPartner entity) => Add((T)entity);
 
-        public void Delete(IBusinessPartner entity) => Delete((T)entity);
+        public void Delete(IBusinessPartner entity)=>Delete((T)entity);
 
         public void Edit(IBusinessPartner entity) => Edit((T)entity);
     }

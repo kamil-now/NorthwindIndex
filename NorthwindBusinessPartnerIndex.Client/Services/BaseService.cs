@@ -12,6 +12,7 @@ namespace NorthwindBusinessPartnerIndex.Client.Services
     {
         protected abstract string Address { get; }
         public async Task<bool> AddOrUpdate(TData entity) => await FromService(service => service.AddOrUpdate(entity));
+        public async Task<bool> Delete(TData entity) => await FromService(service => service.Delete(entity));
         public abstract Task<IList<TData>> GetAll();
         public abstract Task<TData> GetById(int id);
         public async Task<TResult> FromService<TResult>(Func<TService, TResult> func)

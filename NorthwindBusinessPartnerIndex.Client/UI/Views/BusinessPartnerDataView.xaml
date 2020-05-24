@@ -22,13 +22,15 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <ContentControl 
                 Grid.Row="0"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="3"
                 Content="{Binding SelectedBusinessPartner}"
                 ContentTemplateSelector="{StaticResource TemplateSelector}" />
+           
             <Button Content="Save changes"
                     Grid.Row="1"
                     Grid.Column="0"
@@ -41,6 +43,12 @@
                     Margin="3"
                     Typography.Capitals="AllSmallCaps"
                     cal:Message.Attach="[Click]=[New]" />
+            <Button Content="Delete"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="3"
+                    Typography.Capitals="AllSmallCaps"
+                    cal:Message.Attach="[Click]=[Delete]" />
         </Grid>
     </Border>
 </UserControl>

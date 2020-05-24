@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using NorthwindBusinessPartnerIndex.Client.Services;
+using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
+using System.Collections.Generic;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
@@ -11,29 +13,33 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
         private readonly BusinessPartnerService _businessPartnerService;
         public MainViewModel(
             BusinessPartnerService service,
-            BusinessPartnerListViewModel contractorList,
-            BusinessPartnerDataViewModel contractorData)
+            BusinessPartnerListViewModel listView,
+            BusinessPartnerDataViewModel dataView)
         {
             _businessPartnerService = service;
 
-            BusinessPartnerList = contractorList;
-            BusinessPartnerList.Attach(contractorData);
-            BusinessPartnerData = contractorData;
+            BusinessPartnerList = listView;
+            BusinessPartnerList.Attach(dataView);
+            BusinessPartnerData = dataView;
+            BusinessPartnerData.Attach(listView);
         }
         public async void ShowCustomers()
         {
-            var data = await _businessPartnerService.CustomersService.GetAll();
-            BusinessPartnerList.SetData(data);
+            var data = _businessPartnerService.CustomersService.GetAll()
+                .ContinueWith(task => (IList<IBusinessPartner>)task.Result);
+            await BusinessPartnerList.SetData(data);
         }
         public async void ShowShippers()
         {
-            var data = await _businessPartnerService.ShippersService.GetAll();
-            BusinessPartnerList.SetData(data);
+            var data = _businessPartnerService.ShippersService.GetAll()
+                .ContinueWith(task => (IList<IBusinessPartner>)task.Result);;
+            await BusinessPartnerList.SetData(data);
         }
         public async void ShowSuppliers()
         {
-            var data = await _businessPartnerService.SuppliersService.GetAll();
-            BusinessPartnerList.SetData(data);
+            var data = _businessPartnerService.SuppliersService.GetAll()
+                .ContinueWith(task => (IList<IBusinessPartner>)task.Result);
+            await BusinessPartnerList.SetData(data);
         }
     }
 }

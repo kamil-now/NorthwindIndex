@@ -8,5 +8,7 @@ namespace NorthwindBusinessPartnerIndex.Contracts.API
     {
         [OperationContract]
         bool AddOrUpdate(T entity);
+        [OperationContract]
+        bool Delete(T entity);
     }
 }

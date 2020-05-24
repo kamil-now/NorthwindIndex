@@ -4,6 +4,6 @@ namespace NorthwindBusinessPartnerIndex.Client.UI
 {
     public interface ISelectedBusinessPartnerObserver
     {
-        void UpdateSelectedContractor(IBusinessPartner selectedContractor);
+        void SetBusinessPartner(IBusinessPartner selectedContractor);
     }
 }

@@ -36,5 +36,14 @@ namespace NorthwindBusinessPartnerIndex.Host
             }
             return result;
         }
+        public bool Delete(ShipperDto dto)
+        {
+            var result = _unitOfWork.Delete(Mapper.Map(dto));
+            if (result)
+            {
+                _unitOfWork.Commit();
+            }
+            return result;
+        }
     }
 }

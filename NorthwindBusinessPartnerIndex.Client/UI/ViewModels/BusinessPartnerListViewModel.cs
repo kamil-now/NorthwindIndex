@@ -1,12 +1,13 @@
 ﻿using Caliburn.Micro;
 using NorthwindBusinessPartnerIndex.Contracts.DataContracts;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 {
-    public class BusinessPartnerListViewModel : Screen, ISelectedBusinessPartnerSubject
+    public class BusinessPartnerListViewModel : Screen, ISelectedBusinessPartnerSubject, IDataChangedObserver
     {
-        List<ISelectedBusinessPartnerObserver> observers = new List<ISelectedBusinessPartnerObserver>();
+        private List<ISelectedBusinessPartnerObserver> observers = new List<ISelectedBusinessPartnerObserver>();
         private IBusinessPartner selectedBusinessPartner;
 
         public BindableCollection<IBusinessPartner> Data { get; set; } = new BindableCollection<IBusinessPartner>();
@@ -19,17 +20,23 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
                 NotifyObservers();
             }
         }
+        private Task<IList<IBusinessPartner>> _fetchData;
 
-
-        public void SetData(IEnumerable<IBusinessPartner> newData)
+        public async Task RefreshData()
         {
-            if (newData is null)
+            if(_fetchData is null)
             {
                 return;
             }
+            var newData = await _fetchData;
             Data = new BindableCollection<IBusinessPartner>(newData);
             NotifyOfPropertyChange(() => Data);
             Data.Refresh();
+        }
+        public async Task SetData(Task<IList<IBusinessPartner>> fetchData)
+        {
+            _fetchData = fetchData;
+            await RefreshData();
         }
         public void Attach(ISelectedBusinessPartnerObserver observer)
         {
@@ -45,7 +52,7 @@ namespace NorthwindBusinessPartnerIndex.Client.UI.ViewModels
 
         public void NotifyObservers()
         {
-            observers.ForEach(n => n.UpdateSelectedContractor(SelectedBusinessPartner));
+            observers.ForEach(n => n.SetBusinessPartner(SelectedBusinessPartner));
         }
 
     }

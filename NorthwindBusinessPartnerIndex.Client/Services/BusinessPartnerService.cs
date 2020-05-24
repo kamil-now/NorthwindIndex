@@ -25,5 +25,15 @@ namespace NorthwindBusinessPartnerIndex.Client.Services
                 default: return false;
             }
         }
+        public async Task<bool> Delete<T>(T entity)
+        {
+            switch (entity)
+            {
+                case CustomerDto x: return await CustomersService.Delete(x);
+                case SupplierDto x: return await SuppliersService.Delete(x);
+                case ShipperDto x: return await ShippersService.Delete(x);
+                default: return false;
+            }
+        }
     }
 }

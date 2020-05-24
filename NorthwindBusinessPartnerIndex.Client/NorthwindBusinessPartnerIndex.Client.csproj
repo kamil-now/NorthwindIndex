@@ -87,6 +87,8 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\BusinessPartnerService.cs" />
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="UI\IDataChangedObserver.cs" />
+    <Compile Include="UI\IDataChangedSubject.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerDataViewModel.cs" />
     <Compile Include="UI\ViewModels\BusinessPartnerListViewModel.cs" />
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
