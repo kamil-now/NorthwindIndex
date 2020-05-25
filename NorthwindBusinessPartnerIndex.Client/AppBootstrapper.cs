@@ -15,8 +15,8 @@ namespace NorthwindBusinessPartnerIndex.Client
         public IContainer Container { get; private set; }
         public AppBootstrapper()
         {
-            var hostExePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\NorthwindBusinessPartnerIndex.Host\\bin\\Debug\\NorthwindBusinessPartnerIndex.Host.exe";
-            Process.Start(hostExePath);
+            //var hostExePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName}\\NorthwindBusinessPartnerIndex.Host\\bin\\Debug\\NorthwindBusinessPartnerIndex.Host.exe";
+            //Process.Start(hostExePath);
 
             ViewLocator.AddSubNamespaceMapping("NorthwindBusinessPartnerIndex.Client.UI.ViewModels", "NorthwindBusinessPartnerIndex.Client.UI.Views");
 
